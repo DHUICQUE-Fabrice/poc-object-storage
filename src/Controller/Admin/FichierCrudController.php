@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Fichier;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FichierCrudController extends AbstractCrudController
 {
@@ -12,14 +15,17 @@ class FichierCrudController extends AbstractCrudController
         return Fichier::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('nom'),
+            TextField::new('imageFile', 'Upload')
+                ->setFormType(VichImageType::class)
+                ->onlyOnForms(),
+            ImageField::new('imageName', 'Fichier')
+                ->setBasePath('https://u7aw0j.stackhero-network.com/object-storage')
+                ->hideOnForm()
         ];
     }
-    */
 }
